@@ -1,0 +1,25 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div id="calWrap">
+    <div class="top">
+        <input type="text" value="{{ result }}" />
+    </div>
+    <div id="keys">
+    <div (click)="processInput('7')">7</div>
+    <div (click)="processInput('8')">8</div>
+    <div (click)="processInput('9')">9</div>
+    <div (click)="setOperation('+')">+</div>
+    <div (click)="processInput('4')">4</div>
+    <div (click)="processInput('5')">5</div>
+    <div (click)="processInput('6')">6</div>
+    <div (click)="setOperation('-')">-</div>
+    <div (click)="processInput('1')">1</div>
+    <div (click)="processInput('2')">2</div>
+    <div (click)="processInput('3')">3</div>
+    <div (click)="setOperation('*')">*</div>
+    <div (click)="processInput('0')">0</div>
+    <div (click)="processInput('.')">.</div>
+    <div (click)="goBack()">Back</div>
+    <div (click)="setOperation('/')">/</div>
+    <div (click)="clearTotal()" class="clear">c</div>
+    <div (click)="displayResult()" class="equal">=</div>   
+</div>
