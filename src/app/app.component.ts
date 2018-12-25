@@ -33,7 +33,7 @@ export class AppComponent {
       }
   } 
 
-  clearTotal():void {
+  clearResult():void {
       this.result = '';
       this.history = [];
       this.operation = undefined;
@@ -51,6 +51,7 @@ export class AppComponent {
   }
 
   setOperation(op:string):void {
+    // differentiate between negative numbers and subtraction
     if (op === '-') {
       if ((this.result[this.result.length -2] === '-' && this.result[this.result.length -1] === '-') || (this.result.length === 1 && this.result[this.result.length -1] === '-')) {
         return;
@@ -93,5 +94,52 @@ export class AppComponent {
     this.history.pop();
     this.result = this.history[this.history.length -1];
     this.firstOperand = this.result;
+  }
+  processKeyBindings($event) {
+    switch($event.key) {
+      case '1':
+        this.processInput('1');
+        break;
+      case '2':
+        this.processInput('2');
+        break;
+      case '3':
+        this.processInput('3');
+        break;
+      case '4':
+        this.processInput('3');
+        break;
+      case '5':
+        this.processInput('5');
+        break;
+      case '6':
+        this.processInput('6');
+        break;
+      case '7':
+        this.processInput('7');
+        break;
+      case '8':
+        this.processInput('8');
+        break;
+      case '9':
+        this.processInput('9');
+        break;
+      case '-':
+        this.setOperation('-');
+        break;
+      case '+':
+        this.processInput('5');
+        break;
+      case '*':
+        this.processInput('*');
+        break;
+      case '/':
+        this.processInput('/');
+        break;
+      default:
+        this.displayResult();
+        break;
+    }
+  
   }
 }
