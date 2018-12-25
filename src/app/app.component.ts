@@ -53,16 +53,16 @@ export class AppComponent {
   setOperation(op:string):void {
     // differentiate between negative numbers and subtraction
     if (op === '-') {
-      if ((this.result[this.result.length -2] === '-' && this.result[this.result.length -1] === '-') || (this.result.length === 1 && this.result[this.result.length -1] === '-')) {
+      if ((this.result[this.result.length -2] === '-' && this.lastResultChar() === '-') || (this.result.length === 1 && this.lastResultChar() === '-')) {
         return;
       }
-      if(!this.result || this.operations.indexOf(this.result[this.result.length -1]) !== -1) {
+      if(!this.result || this.operations.indexOf(this.lastResultChar()) !== -1) {
         this.processInput(op);
         return;
       }
     }
     //check for the last character so we dont have multiple operations like 1++---5
-    if (this.operations.indexOf(this.result[this.result.length -1]) !== -1 || !this.result || this.result[this.result.length -1] === '-') return;
+    if (this.operations.indexOf(this.lastResultChar()) !== -1 || !this.result || this.lastResultChar() === '-') return;
 
     //if there is a previous operation set, calculare it before setting the new one
     if (this.operation) this.displayResult();
@@ -140,6 +140,10 @@ export class AppComponent {
         this.displayResult();
         break;
     }
-  
+  }
+  private lastResultChar() {
+    if (!this.result) return;
+
+    return this.result[this.result.length -1];
   }
 }

@@ -2,6 +2,12 @@
 
 Preview [Heroku](https://web-calculator.herokuapp.com/)
 
+You can use the keyboard as an input source
+
+Main UI logic is found in app.component
+
+`npm run start-dev` or `npm run ng serve` to run the dev build 
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.4.
 
 ## Development server
