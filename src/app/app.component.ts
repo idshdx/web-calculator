@@ -16,7 +16,7 @@ export class AppComponent {
 
   history:Array<any> = [];
 
-  operations:Array<string> = ['-', '+', '*', '/'];
+  operations:Array<string> = ['+', '*', '/'];
   
   constructor(private operationMap: OperationMap) {
     this.result = '';
@@ -43,12 +43,25 @@ export class AppComponent {
 
   // I would have implemented in this way. SUPER SIMPLE. But the req said i must use OOP so...
   equal() {
-    this.result = eval(this.result.toString());
+    try {
+      this.result = eval(this.result.toString());
+    } catch(e) {
+      throw e;
+    }
   }
 
   setOperation(op:string):void {
+    if (op === '-') {
+      if ((this.result[this.result.length -2] === '-' && this.result[this.result.length -1] === '-') || (this.result.length === 1 && this.result[this.result.length -1] === '-')) {
+        return;
+      }
+      if(!this.result || this.operations.indexOf(this.result[this.result.length -1]) !== -1) {
+        this.processInput(op);
+        return;
+      }
+    }
     //check for the last character so we dont have multiple operations like 1++---5
-    if (this.operations.indexOf(this.result[this.result.length -1]) !== -1 || !this.result) return;
+    if (this.operations.indexOf(this.result[this.result.length -1]) !== -1 || !this.result || this.result[this.result.length -1] === '-') return;
 
     //if there is a previous operation set, calculare it before setting the new one
     if (this.operation) this.displayResult();
@@ -59,6 +72,10 @@ export class AppComponent {
 
   displayResult() {
     if(!this.operation || !this.secondOperand) return;
+
+    console.log('1st: ', this.firstOperand)
+    console.log('2nd: ', this.secondOperand)
+    console.log('op: ', this.operation)
 
     this.result = this.operationMap.getOperation(this.operation).runOperation(parseFloat(this.firstOperand), parseFloat(this.secondOperand));
 
